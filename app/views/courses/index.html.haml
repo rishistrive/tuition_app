@@ -1,0 +1,21 @@
+%p#notice= notice
+= form_tag filters_courses_path, method: :get, remote: true do
+  = hidden_field_tag :authenticity_token, form_authenticity_token
+  = label_tag 'Filters'
+  = filters_select_box
+%h1 Courses
+%table.table
+  %thead
+    %tr
+      %th Information
+      %th Title
+      %th Content
+      %th Start datetime
+      %th End datetime
+      %th Students length
+      %th{colspan: "5"}
+  %tbody#courses-table-data
+    = render 'table_data'
+%br/
+- if can? :create, Course
+  = link_to 'New Course', new_course_path

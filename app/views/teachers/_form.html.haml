@@ -1,0 +1,18 @@
+= form_for(teacher, as: :teacher, url: teacher_path(teacher), method: method) do |f|
+  - if teacher.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(teacher.errors.count, "error")
+        prohibited this teacher from being saved:
+      %ul
+        - teacher.errors.full_messages.each do |message|
+          %li= message
+  .form-group
+    = f.label :name
+    = f.text_field :name, autofocus: true, class: 'form-control'
+  .form-group
+    = f.label :email
+    = f.email_field :email, autofocus: true, class: 'form-control'  
+  .actions
+    = f.submit 'Submit', class: 'btn btn-success'
+ 

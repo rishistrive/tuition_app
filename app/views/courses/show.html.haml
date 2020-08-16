@@ -1,0 +1,54 @@
+%p
+  %strong Information:
+  = @course.information
+%p
+  %strong Title:
+  = @course.title
+%p
+  %strong Content:
+  = @course.content
+%p
+  %strong Start datetime:
+  = @course.start_datetime
+%p
+  %strong End datetime:
+  = @course.end_datetime
+%p
+  %strong Students length:
+  = @course.students_length
+- if can? :update, @course  
+  = link_to 'Edit', edit_course_path(@course)
+= link_to 'Back', courses_path
+.post-comments
+  = form_for Comment.new do |f|
+    .form-group
+      = f.label 'Your Comment'
+      = f.hidden_field :course_id, value: @course.id
+      = f.hidden_field :user_id, value: current_user.id
+      = f.text_area :text, rows: 3, class: 'form-control'
+    = f.submit class: 'btn btn-success'  
+  .panel.panel-default.widget
+    .panel-heading
+      %span.glyphicon.glyphicon-comment
+      %h3.panel-title
+        Recent Comments
+      %span.label.label-info
+        ="There are #{@course.comments.count} comments"
+    .panel-body
+      %ul.list-group
+        - @course.comments.order(updated_at: :desc).each do |comment|
+          %li.list-group-item
+            .row
+              .col-xs-10.col-md-11
+                %div
+                  .mic-info.comment{ id: "comment-#{comment.id}" }
+                    By:
+                    %span.text-primary= comment.user.email
+                    = time_ago_in_words(comment.updated_at)
+                .comment-text
+                  = comment.text
+                .action
+                  - if comment.owner?(current_user)
+                    = link_to 'Edit', edit_comment_path(comment), class: 'btn btn-primary btn-xs edit-comment', remote: true
+                    = link_to 'Delete', comment_path(comment), class: 'btn btn-danger btn-xs', method: :delete
+     

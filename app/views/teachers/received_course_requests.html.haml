@@ -1,0 +1,18 @@
+%h1 Received course requests
+%table.table
+  %thead
+    %tr
+      %th Request Time
+      %th Student
+      %th Course Title
+      %th Course
+      %th
+  %tbody
+    - @received_course_requests.each do |course_request|
+      %tr
+        %td= course_request.request_time.strftime("%-d/%-m/%y: %H:%M %Z")
+        %td= course_request.student.email
+        %td= course_request.course.title
+        %td= link_to 'Course', course_path(course_request.course)
+        %td= link_to 'Approve', approve_course_join_request_path(course_request, teacher: current_user), class: 'btn btn-success'
+        

@@ -1,0 +1,39 @@
+= form_for(course) do |f|
+  - if course.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(course.errors.count, "error")
+        prohibited this course from being saved:
+      %ul
+        - course.errors.full_messages.each do |message|
+          %li= message
+  .form-group
+    = f.label :information
+    = f.text_area :information, autofocus: true, autocomplete: "information", class: 'form-control'
+  .form-group
+    = f.label :title
+    = f.text_field :title, autofocus: true, autocomplete: "title", class: 'form-control'  
+  .form-group
+    = f.label :content
+    = f.text_area :content, autofocus: true, autocomplete: "content", class: 'form-control'
+  .form-group
+    = f.label :start_datetime
+    .input-group.datetime
+      = f.text_field :start_datetime, class: 'form-control datetime'
+      %span.input-group-addon
+        %span.glyphicon.glyphicon-calendar'
+  .form-group
+    = f.label :end_datetime
+    .input-group.datetime
+      = f.text_field :end_datetime, class: 'form-control datetime'
+      %span.input-group-addon
+        %span.glyphicon.glyphicon-calendar
+  .form-group
+    = f.label :students_length
+    = f.text_field :students_length, autofocus: true, autocomplete: "students_length", class: 'form-control'  
+  .form-group
+    = f.label 'Assign teacher'
+    = f.select :teacher_id, Teacher.pluck(:name, :id), {}, class: 'form-control'          
+  .actions
+    = f.submit class: 'btn btn-success'
+ 

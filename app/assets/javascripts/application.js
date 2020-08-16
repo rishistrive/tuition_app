@@ -12,6 +12,15 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require bootstrap.bundle.min
+//= require popper
+//= require moment
+//= require bootstrap-datetimepicker
 //= require turbolinks
 //= require_tree .
 
+$( document ).ready(function() {
+  $('.datetime').datetimepicker({
+    format: 'YYYY-MM-DD hh:mm'
+	})
+});
