@@ -64,7 +64,7 @@ bundle install
 
 ```shell
 rails db:create db:migrate db:seed
-
+```
 
 You can login as super admin with cred.
 Email:   admin@tutionapp.com
@@ -84,8 +84,12 @@ Password:   123456
 
 rspec .
 
+For getting more information of running [rspec](https://github.com/rspec/rspec-rails)
+
 * Run cucumber
+
 
 rake cucumber
 
+For getting more information of running [rspec](https://github.com/cucumber/cucumber-rails)
 
