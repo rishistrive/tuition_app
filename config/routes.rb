@@ -9,11 +9,15 @@ Rails.application.routes.draw do
 
   resources :students
   resources :course_join_requests, only: [] do
-    get 'send_request/:course_id' => 'course_join_requests#send_request', as: 'send_request'
     member do
       get :approve
     end
+    
+    collection do
+      get 'send_request/:course_id' => 'course_join_requests#send_request', as: 'send_request'
+    end
   end
+  
 
   resources :courses do
     collection do
